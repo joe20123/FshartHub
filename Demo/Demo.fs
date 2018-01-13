@@ -68,3 +68,24 @@ module StringManipulation =
     /// Note that like many languages, Strings are zero-indexed in F#.
     let substring = helloWorld.[0..6]
     printfn "%s" substring
+
+module Tuples =
+    let tuple1 = (1,2,3)
+    let swapElems (a, b) = (b,a)
+    printfn "The result of swapping (1,2) is %A" (swapElems (1,2))
+
+module PipelinesAndComposition =
+    let square x = x*x
+    let addOne x = x + 1
+    let isOdd x = x % 2 <> 0
+    let numbers = [1;2;3;4;5]
+    let squareOddValuesAndAddOne values =
+        List.map (square >> addOne) (values 
+        |> List.filter isOdd)
+
+module Lists =
+    let daysList =
+        [ for month in 1 .. 12 do
+            for day in 1 .. System.DateTime.DaysInMonth(2018, month) do
+                yield System.DateTime(2018, month, day)
+            ]
