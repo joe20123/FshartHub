@@ -89,3 +89,32 @@ module Lists =
             for day in 1 .. System.DateTime.DaysInMonth(2018, month) do
                 yield System.DateTime(2018, month, day)
             ]
+
+module SingleCaseDU =
+    type Address = Address of string
+    type Name = Name of string
+    type SSN = SSN of int
+
+    // You can easily instantiate a single-case DU as follows.
+    let address = Address "111 Alf Way"
+    let name = Name "Alf"
+    let ssn = SSN 1234567890
+
+    /// When you need the value, you can unwrap the underlying value with a simple function.
+    let unwrapAddress (Address a) = a
+    let unwrapName (Name n) = n
+    let unwrapSSN (SSN s) = s
+
+    // Printing single-case DUs is simple with unwrapping functions.
+    printfn "Address: %s, Name: %s, and SSN: %d" (address |> unwrapAddress) (name |> unwrapName) (ssn |> unwrapSSN)
+
+
+
+module UnitOfMeasure =
+    open Microsoft.FSharp.Data.UnitSystems.SI.UnitNames
+    let sampleValues1 =1600.0<meter>
+    [<Measure>]
+    type mile =
+        static memeber asMeter = 1609.34<meter/mile>
+    
+    
